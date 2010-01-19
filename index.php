@@ -90,10 +90,18 @@
 
     // blur map
     function blurMap(map) {
-        var nm = map.clone();
+        var nm = [], 
+            x, y;
+        
+        for (y=0; y<map.length; y++) {
+            nm[y] = [];
+            for (x=0; x<map[y].length; x++) {
+                nm[y][x] = map[y][x];
+            }
+        }
 
-        for (var y=1; y<map.length-1; y++)
-            for (var x=1; x<map[y].length-1; x++)
+        for (y=1; y<map.length-1; y++)
+            for (x=1; x<map[y].length-1; x++)
                 nm[y][x] = 
                     (map[y-1][x-1] + map[y-1][x] + map[y-1][x+1] + map[y][x-1] + map[y][x] + map[y][x+1] + map[y+1][x-1] + map[y+1][x] + map[y+1][x+1]) / 9;
 
@@ -103,8 +111,6 @@
 
     // setup and UI
     $(document).ready(function () {
-        Object.prototype.clone = function() { return eval(uneval(this)); }
-
         var hmap = [];
 
         // create map size selector
