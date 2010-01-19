@@ -190,8 +190,8 @@ canvas {
 
 <fieldset><legend>adjust coloring</legend>
 Water: <input id="water" type="text" value="96"> <input id="wp" type="button" value="+"><input id="wm" type="button" value="-">, 
-Forest: <input id="forest" type="text" value="160"> <input id="fp" type="button" value="+"><input id="fm" type="button" value="-">, 
-Mountains: <input id="mountain" type="text" value="192"> <input id="mp" type="button" value="+"><input id="mm" type="button" value="-"><br/>
+Forest: <input id="forest" type="text" value="170"> <input id="fp" type="button" value="+"><input id="fm" type="button" value="-">, 
+Mountains: <input id="mountain" type="text" value="210"> <input id="mp" type="button" value="+"><input id="mm" type="button" value="-"><br/>
 <label for="shadows"><abbr title="Sun in the north">Shadows</abbr>:</label> <input id="shadows" type="checkbox" value="1">,
 <label for="blur"><abbr title="makes drawing a lot slower">Blur</abbr>:</label> <input id="blur" type="checkbox" value="1"></fieldset>
 
