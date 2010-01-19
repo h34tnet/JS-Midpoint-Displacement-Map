@@ -70,7 +70,7 @@
     }
 
     // don't draw with the context image functions
-    function drawColoredMapImgd(canvas, cmap, water, forest, shadows, blur) {
+    function drawColoredMapImgd(canvas, cmap, water, forest, mountains, shadows, blur) {
         var map = blur ? blurMap(cmap) : cmap,
             h = map.length,
             w = map[0].length,
@@ -89,13 +89,16 @@
                 rgb = [0, 0, 0];
                 
                 if (c < water) {
-                    rgb = [0, 0, c+64];
+                    rgb = [0, 0, c+92];
 
                 } else if (c >= water && c < forest) {
-                    rgb = [0, wc, 0];
+                    rgb = [0, wc/1.5, 0];
                     
-                } else if (c >= forest) {
-                    rgb = [c, wc, c];
+                } else if (c >= forest && c < mountains) {
+                    rgb = [wc/1.2, wc/1.2, wc/1.2];
+
+                } else if (c >= mountains) {
+                    rgb = [wc, wc, wc];
                 }
                 
                 var koo = y*w*4 + (x*4);
@@ -132,7 +135,7 @@
             $('#size').append('<option ' + (i==8 ? 'selected="selected"' : '') + '>' + (Math.pow(2, i)+1) + '</option>');
 
         var draw = function (map) {
-            drawColoredMapImgd($('#canv').get(0), map, parseInt($('#water').val()), parseInt($('#forest').val()), $('#shadows:checked').val(), parseInt($('#blur:checked').val()));
+            drawColoredMapImgd($('#canv').get(0), map, parseInt($('#water').val()), parseInt($('#forest').val()), parseInt($('#mountain').val()), $('#shadows:checked').val(), parseInt($('#blur:checked').val()));
         }
 
         var gen = function () {
@@ -184,6 +187,8 @@
         $('#wm').click(function () { adjInpVal($('#water'), -1); });
         $('#fp').click(function () { adjInpVal($('#forest'), +1); });
         $('#fm').click(function () { adjInpVal($('#forest'), -1); });
+        $('#mp').click(function () { adjInpVal($('#mountain'), +1); });
+        $('#mm').click(function () { adjInpVal($('#mountain'), -1); });
 
         // create initial map
         hmap = gen();
@@ -209,9 +214,10 @@ canvas {
 
 <fieldset><legend>adjust coloring</legend>
 Water: <input id="water" type="text" value="96"> <input id="wp" type="button" value="+"><input id="wm" type="button" value="-">, 
-Forest: <input id="forest" type="text" value="192"> <input id="fp" type="button" value="+"><input id="fm" type="button" value="-">, 
-<abbr title="Sun in the north">Shadows</abbr>: <input id="shadows" type="checkbox" value="1">,
-<abbr title="makes drawing a lot slower">Blur</abbr>: <input id="blur" type="checkbox" value="1"></fieldset>
+Forest: <input id="forest" type="text" value="160"> <input id="fp" type="button" value="+"><input id="fm" type="button" value="-">, 
+Mountains: <input id="mountain" type="text" value="192"> <input id="mp" type="button" value="+"><input id="mm" type="button" value="-"><br/>
+<label for="shadows"><abbr title="Sun in the north">Shadows</abbr>:</label> <input id="shadows" type="checkbox" value="1">,
+<label for="blur"><abbr title="makes drawing a lot slower">Blur</abbr>:</label> <input id="blur" type="checkbox" value="1"></fieldset>
 
 <fieldset><legend>generate</legend>
 Size: <select id="size"></select>, Variability (best between 1..2): <input id="variability" type="text" value="1.4"> <input id="start" type="button" value="go!"><br/>
