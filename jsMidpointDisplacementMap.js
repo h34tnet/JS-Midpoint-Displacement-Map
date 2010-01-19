@@ -37,9 +37,31 @@ function MidpointDisplacementMapGenerator(setSize, displacement) {
             divide(cx, cy, x2, y2, nh);
         }
     }
+
+    // adjusts values to between 0 and mdiff (e.g. 0 and 255 for drawing)
+    var adjust = function(map, mdiff) {
+        var s = false, b = false, d;
+        for (var y=0; y<map.length; y++)
+            for (var x=0; x<map[y].length; x++) {
+                if (map[y][x] < s || s === false)
+                    s = map[y][x];
+
+                if (map[y][x] > b || b === false)
+                    b = map[y][x];
+            }
+            
+        d = b-s;
+            
+        for (var y=0; y<map.length; y++)
+            for (var x=0; x<map[y].length; x++) {
+                map[y][x] = (map[y][x]-s) / d * mdiff;
+            }
+            
+        return map;
+    }
     
     // prepare
-    this.generate = function () {
+    this.generate = function (ceil) {
         // init array
         for (var i=0; i<size; i++)
             map[i] = [];
@@ -53,6 +75,6 @@ function MidpointDisplacementMapGenerator(setSize, displacement) {
         // start
         divide(0, 0, size-1, size-1, 1);
         
-        return map;
+        return adjust(map, ceil);
     }        
 }

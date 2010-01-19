@@ -10,29 +10,6 @@
         return (new Date()).getTime();
     }
 
-    // adjusts values to between 0 and mdiff (e.g. 0 and 255 for drawing)
-    function adjust(map, mdiff) {
-        var s = false, b = false, d;
-        for (var y=0; y<map.length; y++)
-            for (var x=0; x<map[y].length; x++) {
-                if (map[y][x] < s || s === false)
-                    s = map[y][x];
-
-                if (map[y][x] > b || b === false)
-                    b = map[y][x];
-            }
-            
-        d = b-s;
-            
-        for (var y=0; y<map.length; y++)
-            for (var x=0; x<map[y].length; x++) {
-                map[y][x] += -s;
-                map[y][x] = Math.floor(map[y][x] / d * mdiff);
-            }
-            
-        return map;
-    }
-    
     // draws map grayscale
     function draw(canvas, map) {
         var ctx = canvas.getContext('2d');
@@ -151,12 +128,11 @@
             var generator = new MidpointDisplacementMapGenerator(size, parseFloat($('#variability').val()));
 
             // generate the map
-            var map = generator.generate();
+            var map = generator.generate(255);
             var genTime = getTime() - tStartGen;
             
             tStart = getTime();
             // adjust values to between 0 and 255
-            var map = adjust(map, 255);
             var adjTime = getTime() - tStart;
 
             tStart = getTime();
