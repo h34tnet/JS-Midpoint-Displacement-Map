@@ -184,7 +184,7 @@ canvas {
     
 <body>
 <h1>midpoint displacement height map</h1>
-<p>Explanation: <a href="http://www.gameprogrammer.com/fractal.html#diamond">www.gameprogrammer.com</a>. Uses html5 canvas, so you need FF, chrome, safari or opera. No IE.</p>
+<p>Explanation: <a href="http://www.gameprogrammer.com/fractal.html#diamond">www.gameprogrammer.com</a>. Uses html5 canvas, so you need FF, chrome, safari or opera. No IE. <a href="http://github.com/schnalle/JS-Midpoint-Displacement-Map">Github source</a></p>
 
 <canvas id="canv" width="0" height="0"></canvas>
 
