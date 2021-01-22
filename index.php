@@ -206,7 +206,5 @@ Size: <select id="size"></select>, Variability (best between 1..2): <input id="v
 Time: <span id="time"></span>
 </fieldset>
 
-
-<p>Questions? Suggestions? Spam? Try <a href="mailto:sirmonko@tapirpirates.net">sirmonko@tapirpirates.net</a>, last updated <?php echo date('Y-m-d', filectime(__FILE__)); ?></p>
 </body>
 </html>
